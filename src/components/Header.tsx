@@ -2,10 +2,12 @@
 import { useEffect, useState } from 'react';
 import { MenuIcon, X } from 'lucide-react';
 import QuoteForm from './QuoteForm';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +28,18 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
   return (
     <header className="relative">
@@ -72,6 +86,7 @@ const Header = () => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="relative z-10 md:hidden text-white focus:outline-none"
+            aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
           >
             {isMenuOpen ? <X size={24} /> : <MenuIcon size={24} />}
           </button>
@@ -84,6 +99,13 @@ const Header = () => {
           } md:hidden`}
         >
           <div className="flex flex-col items-center justify-center h-full space-y-8 text-white text-xl">
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute top-4 right-4 text-white"
+              aria-label="Fechar menu"
+            >
+              <X size={24} />
+            </button>
             <a 
               href="#services" 
               className="hover:text-jrv-red transition-colors"
