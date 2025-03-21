@@ -45,9 +45,9 @@ const Header = () => {
         id="navbar"
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent"
       >
-        <div className="container mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 py-4 flex items-center justify-between">
           <a href="#hero" className="relative z-10 flex items-center">
-            <div className="text-white font-heading font-bold text-2xl md:text-3xl tracking-tight">
+            <div className="text-white font-heading font-bold text-xl sm:text-2xl md:text-3xl tracking-tight">
               <span className="text-white">JRV</span>
               <span className="text-jrv-red">STEEL</span>
             </div>
@@ -127,15 +127,15 @@ const Header = () => {
       {/* Hero Content */}
       <section
         id="hero"
-        className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-6 pt-24 pb-12 overflow-hidden"
+        className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 pt-20 sm:pt-24 pb-8 sm:pb-12 overflow-hidden"
       >
-        <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-10">
           {/* Hero Text */}
           <div className="md:w-1/2 text-center md:text-left reveal">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 sm:mb-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               Soluções completas em estruturas metálicas e coberturas industriais!
             </h1>
-            <p className="text-xl text-gray-200 mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <p className="text-lg sm:text-xl text-gray-200 mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
               Montagem de telhados e estruturas metálicas com segurança, qualidade e eficiência.
             </p>
             <div className="hidden md:flex flex-col sm:flex-row justify-start gap-4 animate-fade-in" style={{ animationDelay: '0.6s' }}>
@@ -150,16 +150,8 @@ const Header = () => {
           </div>
           
           {/* Quote Form */}
-          <div className="md:w-5/12 reveal">
+          <div className="w-full md:w-5/12 reveal">
             <QuoteForm compact={true} />
-          </div>
-        </div>
-
-        {/* Scroll Down Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-          <span className="text-white text-sm mb-2 uppercase tracking-widest">Saiba mais</span>
-          <div className="w-5 h-10 border-2 border-white rounded-full flex justify-center pt-2">
-            <div className="w-1 h-2 bg-white rounded-full animate-bounce" />
           </div>
         </div>
       </section>
