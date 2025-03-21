@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { MenuIcon, X } from 'lucide-react';
+import QuoteForm from './QuoteForm';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -126,31 +127,31 @@ const Header = () => {
       {/* Hero Content */}
       <section
         id="hero"
-        className="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-12 overflow-hidden"
+        className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-6 pt-24 pb-12 overflow-hidden"
       >
-        <div className="container mx-auto px-6 md:px-12 text-center">
-          <div className="max-w-4xl mx-auto reveal">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-10">
+          {/* Hero Text */}
+          <div className="md:w-1/2 text-center md:text-left reveal">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               Soluções completas em estruturas metálicas e coberturas industriais!
             </h1>
-            <p className="text-xl md:text-2xl text-gray-200 mb-10 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <p className="text-xl text-gray-200 mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
               Montagem de telhados e estruturas metálicas com segurança, qualidade e eficiência.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-              <a
-                href="#quote"
-                className="cta-button bg-jrv-red hover:bg-opacity-90 text-lg px-10 py-4 animate-pulse-slow"
-              >
-                Solicitar Orçamento
-              </a>
+            <div className="hidden md:flex flex-col sm:flex-row justify-start gap-4 animate-fade-in" style={{ animationDelay: '0.6s' }}>
               <a
                 href="#services"
-                className="bg-white bg-opacity-10 backdrop-blur-sm hover:bg-opacity-20 text-white font-bold py-4 px-10 rounded-md 
+                className="bg-white bg-opacity-10 backdrop-blur-sm hover:bg-opacity-20 text-white font-bold py-3 px-8 rounded-md 
                 transition-all duration-300 transform hover:scale-[1.02] shadow-lg uppercase tracking-wide"
               >
                 Nossos Serviços
               </a>
             </div>
+          </div>
+          
+          {/* Quote Form */}
+          <div className="md:w-5/12 reveal">
+            <QuoteForm compact={true} />
           </div>
         </div>
 

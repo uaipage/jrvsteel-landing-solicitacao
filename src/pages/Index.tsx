@@ -1,7 +1,6 @@
 
 import { useEffect } from 'react';
 import Header from '../components/Header';
-import QuoteForm from '../components/QuoteForm';
 import Services from '../components/Services';
 import AboutUs from '../components/AboutUs';
 import Benefits from '../components/Benefits';
@@ -30,7 +29,6 @@ const Index = () => {
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
       <main>
-        <QuoteForm />
         <Services />
         <AboutUs />
         <Benefits />
