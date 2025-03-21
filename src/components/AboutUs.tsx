@@ -16,6 +16,13 @@ const Metric: React.FC<MetricProps> = ({ value, label }) => {
 };
 
 const AboutUs = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <section id="about" className="relative py-20 bg-jrv-navy text-white overflow-hidden">
       {/* Background Pattern */}
@@ -43,13 +50,13 @@ const AboutUs = () => {
               Na JRVSTEEL, acreditamos que a qualidade não é apenas um objetivo, mas um padrão. Cada projeto é executado com materiais premium e técnicas avançadas, garantindo soluções duradouras que atendem às expectativas mais exigentes do mercado.
             </p>
             
-            <a
-              href="#quote"
+            <button
+              onClick={scrollToTop}
               className="inline-block bg-jrv-red hover:bg-opacity-90 text-white font-bold py-3 px-8 rounded-md 
                       transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
             >
               Conheça Nosso Trabalho
-            </a>
+            </button>
           </div>
           
           {/* Right Content - Image */}

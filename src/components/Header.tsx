@@ -41,6 +41,14 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className="relative">
       {/* Hero Background */}
@@ -73,13 +81,13 @@ const Header = () => {
             <a href="#about" className={`navbar-link ${activeSection === 'about' ? 'active' : ''}`}>Sobre Nós</a>
             <a href="#benefits" className={`navbar-link ${activeSection === 'benefits' ? 'active' : ''}`}>Benefícios</a>
             <a href="#contact" className={`navbar-link ${activeSection === 'contact' ? 'active' : ''}`}>Contato</a>
-            <a 
-              href="#quote" 
+            <button 
+              onClick={scrollToTop}
               className="bg-jrv-red hover:bg-opacity-90 text-white font-medium py-2 px-6 rounded-md 
                       transition-all duration-300 transform hover:scale-[1.02] shadow-md"
             >
               Orçamento
-            </a>
+            </button>
           </div>
 
           {/* Mobile Navigation Toggle */}
@@ -134,14 +142,13 @@ const Header = () => {
             >
               Contato
             </a>
-            <a 
-              href="#quote" 
+            <button 
+              onClick={scrollToTop}
               className="bg-jrv-red hover:bg-opacity-90 text-white font-medium py-3 px-8 rounded-md 
                         transition-all duration-300"
-              onClick={() => setIsMenuOpen(false)}
             >
               Orçamento
-            </a>
+            </button>
           </div>
         </div>
       </nav>

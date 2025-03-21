@@ -54,6 +54,13 @@ const Services = () => {
     },
   ];
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <section id="services" className="bg-gray-50 py-20 md:py-28">
       <div className="container-section">
@@ -76,12 +83,12 @@ const Services = () => {
         </div>
 
         <div className="mt-16 text-center reveal">
-          <a
-            href="#quote"
+          <button
+            onClick={scrollToTop}
             className="cta-button inline-block"
           >
             Solicitar Orçamento
-          </a>
+          </button>
         </div>
       </div>
 
@@ -140,13 +147,13 @@ const Services = () => {
                 </div>
               </div>
               
-              <a
-                href="#quote"
+              <button
+                onClick={scrollToTop}
                 className="mt-8 inline-block bg-white text-jrv-navy font-bold py-3 px-8 rounded-md 
                          transition-all duration-300 transform hover:scale-[1.02] hover:bg-jrv-red hover:text-white"
               >
                 Fale com um especialista
-              </a>
+              </button>
             </div>
             
             <div className="md:w-1/2 relative">
