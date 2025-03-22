@@ -1,11 +1,10 @@
-
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 // Inicializar o cliente Supabase
-const supabaseUrl = "https://jzldnrenkzndlxsefldg.supabase.co";
-const supabaseAnonKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6bGRucmVua3puZGx4c2VmbGRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2MTI1ODYsImV4cCI6MjA1ODE4ODU4Nn0.NZmqY1Gpk8eokMCYWnWOz6pJw24XALFcIyuN8aYj00A";
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 interface FormData {
@@ -46,6 +45,8 @@ export const useQuoteForm = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    const siteOrigin = window.location.origin;
+
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
@@ -57,7 +58,8 @@ export const useQuoteForm = () => {
           name: formData.name,
           email: formData.email,
           number: formData.whatsapp,
-          message: formData.message
+          message: formData.message,
+          origin: siteOrigin
         }
       ]);
 
