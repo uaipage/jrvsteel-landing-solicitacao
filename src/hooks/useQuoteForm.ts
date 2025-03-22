@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
@@ -50,8 +51,8 @@ export const useQuoteForm = () => {
     setError(null);
 
     try {
-      // Enviar dados para o Supabase
-      const { error } = await supabase.from("orcamentos").insert([
+      // Enviar dados para o Supabase na tabela "emails"
+      const { error } = await supabase.from("emails").insert([
         {
           nome: formData.name,
           email: formData.email,
