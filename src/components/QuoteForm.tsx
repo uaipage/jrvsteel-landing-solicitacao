@@ -1,9 +1,16 @@
+
 import { useState } from 'react';
 import { CheckCircle } from 'lucide-react';
+import { createClient } from '@supabase/supabase-js';
 
 interface QuoteFormProps {
   compact?: boolean;
 }
+
+// Inicializar o cliente Supabase
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const QuoteForm = ({ compact = false }: QuoteFormProps) => {
   const [formData, setFormData] = useState({
@@ -15,22 +22,37 @@ const QuoteForm = ({ compact = false }: QuoteFormProps) => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Enviar dados para o Supabase
+      const { error } = await supabase
+        .from('orcamentos')
+        .insert([
+          { 
+            nome: formData.name,
+            email: formData.email,
+            whatsapp: formData.whatsapp,
+            mensagem: formData.message,
+            data_solicitacao: new Date().toISOString()
+          }
+        ]);
+      
+      if (error) throw error;
+      
       setIsSubmitted(true);
       
-      // Reset form after 3 seconds
+      // Reset form after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
         setFormData({
@@ -40,7 +62,12 @@ const QuoteForm = ({ compact = false }: QuoteFormProps) => {
           message: ''
         });
       }, 5000);
-    }, 1500);
+    } catch (err) {
+      console.error('Erro ao enviar dados:', err);
+      setError('Não foi possível enviar o formulário. Por favor, tente novamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Conditional classes based on compact mode
@@ -95,6 +122,11 @@ const QuoteForm = ({ compact = false }: QuoteFormProps) => {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    {error && (
+                      <div className="bg-red-500/20 border border-red-500 text-white p-3 rounded-md">
+                        {error}
+                      </div>
+                    )}
                     <div>
                       <label htmlFor="name" className="block text-gray-300 mb-2">
                         Nome Completo
@@ -226,6 +258,11 @@ const QuoteForm = ({ compact = false }: QuoteFormProps) => {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className={formGapClass}>
+            {error && (
+              <div className="bg-red-500/20 border border-red-500 text-white p-3 rounded-md text-sm">
+                {error}
+              </div>
+            )}
             <div>
               <label htmlFor="name" className="block text-gray-300 mb-1 text-sm">
                 Nome Completo
