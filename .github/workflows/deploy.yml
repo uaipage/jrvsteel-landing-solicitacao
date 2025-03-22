@@ -1,0 +1,34 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Ou o nome da sua branch principal
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16" # ou outra versão do Node.js
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build app
+        run: |
+          npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # A branch onde os arquivos serão publicados
+          folder: build # Pasta gerada pelo `npm run build`
+          token: ${{ secrets.GITHUB_TOKEN }}
