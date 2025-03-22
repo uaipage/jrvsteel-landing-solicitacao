@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
@@ -54,11 +53,10 @@ export const useQuoteForm = () => {
       // Enviar dados para o Supabase na tabela "emails"
       const { error } = await supabase.from("emails").insert([
         {
-          nome: formData.name,
+          name: formData.name,
           email: formData.email,
-          whatsapp: formData.whatsapp,
-          mensagem: formData.message,
-          data_solicitacao: new Date().toISOString()
+          number: formData.whatsapp,
+          message: formData.message
         }
       ]);
 
