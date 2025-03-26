@@ -81,7 +81,7 @@ export const useQuoteForm = () => {
 
       // Enviar os dados para a API de envio de e-mails
       const emailData = {
-        to: "gabrielmillersilone@gmail.com", // O e-mail de destino
+        to: "andreviana.controle@gmail.com", // O e-mail de destino
         subject: `Novo Lead de ${formData.name}`,
         message: emailMessage // Mensagem formatada
       };
