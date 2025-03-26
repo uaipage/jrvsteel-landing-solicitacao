@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-
+import axios from "axios";
 // Inicializar o cliente Supabase
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -69,6 +69,27 @@ export const useQuoteForm = () => {
       if (error) throw error;
 
       setIsSubmitted(true);
+
+      // Criando a mensagem no formato desejado
+      const emailMessage = `
+  Novo Lead JRVSteelobras:<br />
+  <strong>Nome Completo:</strong> ${formData.name}<br />
+  <strong>E-mail:</strong> ${formData.email}<br />
+  <strong>Whatsapp:</strong> ${formData.whatsapp}<br />
+  <strong>Mensagem:</strong> "${formData.message}"<br />
+`;
+
+      // Enviar os dados para a API de envio de e-mails
+      const emailData = {
+        to: "gabrielmillersilone@gmail.com", // O e-mail de destino
+        subject: `Novo Lead de ${formData.name}`,
+        message: emailMessage // Mensagem formatada
+      };
+
+      await axios.post(
+        "https://email-sender-cz46.onrender.com/send-email", // URL da sua API de envio de e-mail
+        emailData
+      );
 
       // Reset form after 5 seconds
       setTimeout(() => {
