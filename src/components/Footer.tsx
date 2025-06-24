@@ -17,7 +17,7 @@ const Footer = () => {
                 industriais com qualidade e comprometimento.
               </p>
             </div>
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <a
                 href="#"
                 className="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-jrv-red transition-colors duration-300"
@@ -50,16 +50,20 @@ const Footer = () => {
                   <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                 </svg>
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-bold mb-6 relative inline-block pb-2 after:absolute after:bottom-0 after:left-0 after:w-12 after:h-0.5 after:bg-jrv-red">
+            <h3 className="text-lg font-bold mb-6 relative inline-block pb-2 after:absolute after:bottom-0 after:left-0 after:w-12 after:h-0.5 after:bg-jrv-red"
+            style={{
+                color: "#fff",
+              }}
+            >
               Contato
             </h3>
             <ul className="space-y-4">
-              <li className="flex items-start">
+              {/* <li className="flex items-start">
                 <svg
                   className="w-5 h-5 mr-3 text-jrv-red flex-shrink-0 mt-1"
                   fill="none"
@@ -85,7 +89,7 @@ const Footer = () => {
                   <br />
                   Bairro Centro, São Paulo - SP
                 </span>
-              </li>
+              </li> */}
               <li className="flex items-center">
                 <svg
                   className="w-5 h-5 mr-3 text-jrv-red flex-shrink-0"
@@ -144,7 +148,12 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-6 relative inline-block pb-2 after:absolute after:bottom-0 after:left-0 after:w-12 after:h-0.5 after:bg-jrv-red">
+            <h3
+              className="text-lg font-bold mb-6 relative inline-block pb-2 after:absolute after:bottom-0 after:left-0 after:w-12 after:h-0.5 after:bg-jrv-red"
+              style={{
+                color: "#fff",
+              }}
+            >
               Links Rápidos
             </h3>
             <ul className="space-y-3">
@@ -193,7 +202,11 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-lg font-bold mb-6 relative inline-block pb-2 after:absolute after:bottom-0 after:left-0 after:w-12 after:h-0.5 after:bg-jrv-red">
+            <h3 className="text-lg font-bold mb-6 relative inline-block pb-2 after:absolute after:bottom-0 after:left-0 after:w-12 after:h-0.5 after:bg-jrv-red"
+            style={{
+                color: "#fff",
+              }}
+            >
               Newsletter
             </h3>
             <p className="text-gray-400 mb-4">
