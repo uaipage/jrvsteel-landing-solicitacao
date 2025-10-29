@@ -1,11 +1,4 @@
 import { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
-import axios from "axios";
-// Inicializar o cliente Supabase
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 interface FormData {
   name: string;
@@ -45,58 +38,34 @@ export const useQuoteForm = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    const siteOrigin = window.location.origin;
-
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
 
     try {
-      // Enviar dados para o Supabase na tabela "emails"
-      const { error } = await supabase.from("emails").insert([
-        {
-          name: formData.name,
-          email: formData.email,
-          number: formData.whatsapp,
-          message: formData.message,
-          origin: siteOrigin
-        }
-      ]);
+      // Número do WhatsApp de destino no formato internacional (Brasil: 55)
+      const businessPhoneE164 = "5511937297423"; // (11) 93729-7423
 
-      if (error) throw error;
+      // Montar a mensagem com os dados do formulário
+      const lines = [
+        "Olá, gostaria de solicitar um orçamento.",
+        `Nome: ${formData.name}`,
+        `E-mail: ${formData.email}`,
+        `WhatsApp: ${formData.whatsapp}`,
+        formData.message ? `Mensagem: ${formData.message}` : undefined
+      ].filter(Boolean) as string[];
 
-      setIsSubmitted(true);
+      const text = encodeURIComponent(lines.join("\n"));
+      const waUrl = `https://wa.me/${businessPhoneE164}?text=${text}`;
 
-      // Criando a mensagem no formato desejado
-      const emailMessage = `
-  Novo Lead JRVSteelobras:<br />
-  <strong>Nome Completo:</strong> ${formData.name}<br />
-  <strong>E-mail:</strong> ${formData.email}<br />
-  <strong>Whatsapp:</strong> ${formData.whatsapp}<br />
-  <strong>Mensagem:</strong> "${formData.message}"<br />
-`;
+      // Abrir o WhatsApp com a mensagem pré-preenchida
+      window.open(waUrl, "_blank");
 
-      // Enviar os dados para a API de envio de e-mails
-      const emailData = {
-        to: "andreviana.controle@gmail.com", // O e-mail de destino
-        subject: `Novo Lead de ${formData.name}`,
-        message: emailMessage // Mensagem formatada
-      };
-
-      await axios.post(
-        "https://email-sender-cz46.onrender.com/send-email", // URL da sua API de envio de e-mail
-        emailData
-      );
-
-      // Reset form after 5 seconds
-      setTimeout(() => {
-        resetForm();
-      }, 5000);
+      // Opcional: resetar o formulário imediatamente
+      resetForm();
     } catch (err) {
-      console.error("Erro ao enviar dados:", err);
-      setError(
-        "Não foi possível enviar o formulário. Por favor, tente novamente."
-      );
+      console.error("Erro ao abrir WhatsApp:", err);
+      setError("Não foi possível abrir o WhatsApp. Tente novamente.");
     } finally {
       setIsSubmitting(false);
     }
