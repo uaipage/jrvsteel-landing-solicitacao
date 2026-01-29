@@ -63,13 +63,15 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for JRVSTEEL
+				// Custom colors for JRVSTEEL - Logo Orange Theme
 				jrv: {
-					navy: '#00265D',
-					red: '#B80B11',
-					light: '#F5F7FA',
-					gray: '#8E9196',
-					dark: '#1A1F2C',
+					orange: '#de4402',          // Cor laranja principal do logo
+					'orange-dark': '#de4402',   // Laranja escuro para hover
+					navy: '#2B2D35',             // Cinza escuro para fundos (substituindo azul navy)
+					red: '#de4402',              // Mantendo compatibilidade, agora aponta para laranja
+					light: '#F5F7FA',            // Mantém o branco suave
+					gray: '#666C7A',             // Cinza bronze do logo
+					dark: '#2B2D35',             // Cinza escuro
 				}
 			},
 			borderRadius: {
